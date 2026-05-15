@@ -1,0 +1,64 @@
+version: 2
+
+project_name: dafcli
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+      - -X main.version={{.Version}}
+    ignore:
+      - goos: windows
+        goarch: arm64
+
+archives:
+  - formats:
+      - tar.gz
+    format_overrides:
+      - goos: windows
+        formats:
+          - zip
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - src: .claude/skills/daf/SKILL.md
+        dst: skill/SKILL.md
+
+checksum:
+  name_template: checksums.txt
+
+release:
+  github:
+    owner: kaspermunck
+    name: dafcli
+
+brews:
+  - name: dafcli
+    repository:
+      owner: kaspermunck
+      name: homebrew-tap
+      branch: main
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    directory: Formula
+    homepage: https://github.com/kaspermunck/dafcli
+    description: "CLI for querying Datafordeler (Danish grunddata) via GraphQL — MAT, BBR, DAR, DAGI"
+    license: MIT
+    install: |
+      bin.install "dafcli"
+      pkgshare.install "skill"
+    caveats: |
+      To enable the Claude Code skill, run once:
+        mkdir -p ~/.claude/skills && ln -sfn #{opt_pkgshare}/skill ~/.claude/skills/daf
+    test: |
+      system "#{bin}/dafcli", "--help"

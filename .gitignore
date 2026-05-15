@@ -1,0 +1,15 @@
+dafcli
+dist/
+.env
+.envrc
+.DS_Store
+*.swp
+*~
+
+# Per-user Claude state — never commit (can leak PII, client names, internal
+# infra references). CLAUDE.md at the project root IS committed; everything
+# under .claude/ that's user-specific is excluded.
+.claude/MEMORY.md
+.claude/memory/
+.claude/settings.json
+.claude/settings.local.json
