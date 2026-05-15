@@ -124,3 +124,22 @@ If you suspect the key has been exposed, rotate it in the portal and overwrite t
 ```sh
 security add-generic-password -s "dafcli" -a "DAF_API_KEY" -w '<new-key>' -U
 ```
+
+## Acknowledgements
+
+`dafcli` accesses data published via the [Datafordeler](https://datafordeler.dk) platform (operated by [Klimadatastyrelsen](https://klimadatastyrelsen.dk)) and via [DAWA](https://dawa.aws.dk) (Danmarks Adressers Web API, also Klimadatastyrelsen). The individual registers are owned by:
+
+- **MAT** (Matriklen) — [Geodatastyrelsen](https://gst.dk)
+- **BBR** (Bygnings- og Boligregistret) — [Vurderingsstyrelsen](https://vurderingsportalen.dk) in collaboration with the Danish municipalities
+- **DAR** (Danmarks Adresseregister) and **DAGI** (Danmarks Administrative Geografiske Inddeling) — [Klimadatastyrelsen](https://klimadatastyrelsen.dk)
+
+`dafcli` is an independent open-source tool and is not affiliated with or endorsed by any of these authorities.
+
+When publishing work derived from this data, credit the originating register, e.g.:
+
+> Kilde: Matriklen / Geodatastyrelsen
+> Kilde: BBR / Vurderingsstyrelsen og kommunerne
+
+## License
+
+This software is released under the [MIT License](LICENSE). The data it fetches is published by the registers listed above under their respective terms — most are open data, but consult each authority's terms before commercial bulk reuse.
